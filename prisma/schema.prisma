@@ -1,0 +1,28 @@
+datasource db {
+    provider = "postgresql"
+    url = env("PRISMA_DATABASE_URL")
+}
+
+generator client {
+    provider= "prisma-client-js"
+}
+
+model Profile {
+	id								String    			@id
+
+	blacklisted						Boolean				@default(false)
+
+	userId							String
+	guildId							String?
+	guild 							Guild? 				@relation("guildProfiles", fields: [guildId], references: [id], onDelete: Cascade)
+
+	coins							Int					@default(0)
+}
+
+model Guild {
+	id								String				@id
+
+	blacklisted						Boolean				@default(false)
+
+	profiles 						Profile[]			@relation("guildProfiles")
+}

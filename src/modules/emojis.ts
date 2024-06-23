@@ -1,0 +1,15 @@
+export default {
+	"success": "<:Success:805946030385922068> ",
+	"isuccess": "<:GreenCheckInv:924236592195964928> ",
+	"fail": "<:Fail:805946030512013325> ",
+	"ifail": "<:RedCheckInv:923794387497000973> ",
+	"wtick": "<:WhiteTick:923400142915260496> ",
+	"wgear": "<:WhiteGear:923401292062261258> ",
+	"wgavel": "<:WhiteGavel:923401798008602636> ",
+	"growth": "<:Growth:930976206885621810> ",
+	"factory": "<:factory:931731682145501215> ",
+	"red": "<:RedBall:830193062877462548> ",
+	"green": "<:GreenBall:830192210330910731> ",
+	"info": "<:Info:1025924822166945823> ",
+	"invis": "<:Invisible:934458366611320842> ",
+};
