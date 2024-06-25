@@ -15,4 +15,5 @@ export const options: CommandOptions = {
     userPermissions: ['Administrator', 'AddReactions'],
     botPermissions: ['Administrator', 'AddReactions', "KickMembers"],
     deleted: false,
+    cooldown: 5 * 1000,
 }

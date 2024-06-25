@@ -1,17 +1,31 @@
 import type { ValidationProps } from 'commandkit';
+
+const cooldowns = new Map<string, number>();
  
 export default function ({ interaction, commandObj, handler }: ValidationProps) {
 	if (interaction.isAutocomplete()) return true;
 
-	// TODO: Implement cooldowns
-    /* if (cooldowns.has(`${interaction.user.id}-${commandObj.data.name}`)) {
-        interaction.reply({
-            content: "You're on cooldown, please wait some time before running this command again.",
-            ephemeral: true,
-        });
- 
-        return true; // This is important
-    } */
+    if (interaction.isChatInputCommand() && commandObj.options!.cooldown) {
+        const id = `${interaction.guildId}-${interaction.user.id}-${commandObj.data.name}`;
 
-	return true;
+
+        if (!cooldowns.has(id)) {
+            cooldowns.set(id, Date.now() + commandObj.options!.cooldown);
+        } else {
+            const cooldown = cooldowns.get(id);
+ 
+            if (cooldown! > Date.now()) {
+                interaction.reply({
+                    content: `Slow down!`,
+                    ephemeral: true,
+                });
+ 
+                return true;
+            }
+ 
+            cooldowns.set(id, Date.now() + commandObj.options!.cooldown);
+        }
+    }
+
+	return false;
 };
