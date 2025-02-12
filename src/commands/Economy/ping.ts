@@ -1,11 +1,9 @@
-import { type CommandData, type SlashCommandProps, type CommandOptions, ButtonKit } from 'commandkit';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
+import { type SlashCommandProps, type CommandOptions } from 'commandkit';
+import { SlashCommandBuilder } from 'discord.js';
 
-export const data: CommandData = {
-    name: 'pping',
-    description: 'Pong!',
-    dm_permission: false,
-}
+export const data = new SlashCommandBuilder()
+    .setName('ping')
+    .setDescription('Check the bot\'s latency.');
 
 export async function run({ interaction, client, handler }: SlashCommandProps) {
     await interaction.reply({ content: `:ping_pong: Pong! ${client.ws.ping}ms`, ephemeral: true });

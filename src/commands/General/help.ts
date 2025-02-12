@@ -1,12 +1,10 @@
 import { type CommandData, type SlashCommandProps, type CommandOptions, ButtonKit } from 'commandkit';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, REST, Routes } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, EmbedBuilder, REST, Routes, SlashCommandBuilder } from 'discord.js';
 const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN as string);
 
-export const data: CommandData = {
-	name: 'help',
-	description: 'View all commands!',
-	dm_permission: false,
-}
+export const data = new SlashCommandBuilder()
+	.setName('help')
+	.setDescription('List all available slash commands.');
 
 export async function run({ interaction, client, handler }: SlashCommandProps) {
 	if (!process.env.APP_ID) return interaction.reply({ content: "APP_ID not set in .env file", ephemeral: true });
@@ -44,4 +42,11 @@ export async function run({ interaction, client, handler }: SlashCommandProps) {
 		}));
 
 	return interaction.editReply({ content: "", embeds: [embed] });
+}
+
+export const options: CommandOptions = {
+	userPermissions: [],
+	botPermissions: [],
+	deleted: false,
+	cooldown: 5 * 1000,
 }
